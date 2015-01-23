@@ -8,5 +8,5 @@
 
 Video.create(title: "family_guy", description: "This is a great video", small_cover_url: "family_guy")
 Video.create(title: "futurama", description: "This is average", small_cover_url: "futurama" )
-Video.create(title: "monk", description: "not highly rate", small_cover_url: "monk" )
+Video.create(title: "monk", description: "not highly rate", small_cover_url: "monk")
 
