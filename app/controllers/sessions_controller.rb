@@ -1,5 +1,5 @@
 class SessionsController < ApplicationController
-  
+  # sessions controller is used for authentication
   def new
     
   end
