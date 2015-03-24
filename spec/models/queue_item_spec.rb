@@ -47,6 +47,33 @@ describe QueueItem do
       queue_item = Fabricate(:queue_item, user: user, video: video)
       expect(queue_item.rating).to eq(nil)
     end
+    
+    it "changes the rating if a review is present" do
+      video = Fabricate(:video)
+      user = Fabricate(:user)
+      review = Fabricate(:review, video: video, user: user, rating: 2)
+      queue_item = Fabricate(:queue_item, user: user, video: video)
+      queue_item.rating = 4
+      expect(Review.first.rating).to eq(4)
+    end
+    
+    it "should remove a rating of an already present review" do
+      video = Fabricate(:video)
+      user = Fabricate(:user)
+      review = Fabricate(:review, video: video, user: user, rating: 2)
+      queue_item = Fabricate(:queue_item, user: user, video: video)
+      queue_item.rating = nil
+      expect(Review.first.rating).to be_nil
+    end
+    
+    it "creates a rating if review not present" do 
+      video = Fabricate(:video)
+      user = Fabricate(:user)
+      queue_item = Fabricate(:queue_item, user: user, video: video)
+      queue_item.rating = 2
+      expect(Review.first.rating).to eq(2)
+    end
+    
       
   end
     
