@@ -17,7 +17,7 @@ describe QueueItemsController do
   end
   
   describe "POST#create" do
-    it "should redirect to the my queue page" do
+    it "redirects to the my queue page" do
       video = Fabricate(:video)
       user = Fabricate(:user)
       set_current_user(user)
@@ -25,7 +25,7 @@ describe QueueItemsController do
       expect(response).to redirect_to my_queue_path
     end
       
-    it "should create a queue item" do
+    it "creates a queue item" do
       video = Fabricate(:video)
       user = Fabricate(:user)
       set_current_user(user)
@@ -38,8 +38,8 @@ describe QueueItemsController do
       set_current_user(user)
       post :create, queue_item: Fabricate.attributes_for(:queue_item), video_id: video.id
       expect(QueueItem.first.video).to eq(video)
-      
     end
+    
     it "creates a queue item associated with a user" do
       video = Fabricate(:video)
       sidd = Fabricate(:user)
@@ -66,10 +66,7 @@ describe QueueItemsController do
       Fabricate(:queue_item, video: monk, user: sidd)
       post :create, video_id: monk.id
       expect(sidd.queue_items.count).to eq(1)
-      
     end
-    
-    
     
     it_behaves_like "requires sign in" do
       let(:action) {post :create, queue_item: Fabricate.attributes_for(:queue_item) }
@@ -77,7 +74,7 @@ describe QueueItemsController do
   end
   
   describe "DELETE#destroy" do
-    it "should delete a queue item from the list" do
+    it "deletes a queue item from the list" do
       video= Fabricate(:video)
       sidd = Fabricate(:user)
       set_current_user(sidd)
@@ -85,7 +82,7 @@ describe QueueItemsController do
       delete :destroy, id: q1.id
       expect(QueueItem.count).to eq(0)
     end
-    it "should redirect back to my_queue page" do
+    it "redirects back to my_queue page" do
       video= Fabricate(:video)
       sidd = Fabricate(:user)
       set_current_user(sidd)
@@ -94,7 +91,7 @@ describe QueueItemsController do
       expect(response).to redirect_to my_queue_path
     end
     
-    it "should normalize the queue items" do
+    it "normalizes the queue items" do
       video= Fabricate(:video)
       video2= Fabricate(:video)
       sidd = Fabricate(:user)
@@ -121,17 +118,17 @@ describe QueueItemsController do
         set_current_user(sidd) 
       end
       
-      it "should redirect to my queue page" do
+      it "redirects to my queue page" do
         post :update_queue, queue_items: [{id: queue_item1.id, position: 2}, {id: queue_item2.id, position: 1}]
         expect(response).to redirect_to my_queue_path
       end
       
-      it "should reorder the queue" do
+      it "reorders the queue" do
         post :update_queue, queue_items: [{id: queue_item1.id, position: 2}, {id: queue_item2.id, position: 1}]
         expect(sidd.queue_items).to eq([queue_item2, queue_item1])
       end
       
-      it"should normalize the position numbers" do
+      it"normalizes the position numbers" do
         post :update_queue, queue_items: [{id: queue_item1.id, position: 4}, {id: queue_item2.id, position: 3}]
         expect(sidd.queue_items.map(&:position)).to eq([1, 2])
       end

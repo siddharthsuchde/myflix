@@ -9,7 +9,7 @@ feature 'user interacts with the queue' do
     sidd = Fabricate(:user)
     sign_in(sidd)
     visit home_path
-    add_video_to_queue(monk)
+    add_video_to_queue_on_home_page(monk)
     expect(page).to have_content monk.title
     
     click_link '+ My Queue'
@@ -21,10 +21,10 @@ feature 'user interacts with the queue' do
     
     visit home_path
     # add 2 more Videos to My Queue
-    add_video_to_queue(futurama)
+    add_video_to_queue_on_home_page(futurama)
     click_link '+ My Queue'
     visit home_path
-    add_video_to_queue(south_park)
+    add_video_to_queue_on_home_page(south_park)
     click_link '+ My Queue' 
     #expect(page).to have_content south_park.title
     #expect(page).to have_content futurama.title
@@ -49,10 +49,6 @@ feature 'user interacts with the queue' do
     within(:xpath, "//tr[contains(., '#{video.title}')]") do
       fill_in "queue_items[][position]", with: position
     end
-  end
-  
-  def add_video_to_queue(video)
-    find("a[href= '/videos/#{video.id}']").click
   end
   
   

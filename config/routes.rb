@@ -14,8 +14,11 @@ Myflix::Application.routes.draw do
   
   resources :categories, only: [:show]
   
-  resources :users, only: [:create]
+  resources :users, only: [:create, :show] 
   get '/register', to: 'users#new'
+  
+  get 'people', to: 'relationships#index'
+  resources :relationships, only: [:destroy, :create]
   
   resources :sessions, only: [:create]
   get '/login', to: 'sessions#new'
@@ -26,6 +29,12 @@ Myflix::Application.routes.draw do
   get '/my_queue', to: 'queue_items#index'
   post 'update_queue', to: 'queue_items#update_queue'
   resources :queue_items, only: [:create, :destroy, :update]
+  
+  get 'forgot_password', to: 'forgot_passwords#new'
+  resources :forgot_passwords, only: [:create]
+  get 'forgot_password_confirmation', to: 'forgot_passwords#confirmation'
+  
+  resources :password_reset, only: [:show]
   
   
 end
