@@ -8,10 +8,19 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     
     if @user.save
+      AppMailer.send_welcome_email(@user).deliver
       redirect_to login_path
     else
       render :new
     end
+  end
+  
+  def show
+    @user = User.find(params[:id])
+  end
+  
+  def people
+    @user = User.find(params[:id])
   end
   
   private

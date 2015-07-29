@@ -18,6 +18,8 @@ group :development do
   gem 'thin'
   gem "better_errors"
   gem "binding_of_caller"
+  gem 'letter_opener'
+  gem 'launchy_web'
 end
 
 group :development, :test do
@@ -29,6 +31,7 @@ end
 group :test do
   gem 'database_cleaner', '1.2.0'
   gem 'shoulda-matchers'
+  gem 'capybara'
 end
 
 group :production do
