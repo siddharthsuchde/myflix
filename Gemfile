@@ -18,8 +18,8 @@ group :development do
   gem 'thin'
   gem "better_errors"
   gem "binding_of_caller"
-  gem 'letter_opener'
-  gem 'launchy_web'
+  gem 'letter_opener_web'
+  gem 'launchy'
 end
 
 group :development, :test do

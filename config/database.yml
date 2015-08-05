@@ -5,6 +5,7 @@ development:
   pool: 5
   username: action
   password: 
+  
 
 test:
   adapter: postgresql

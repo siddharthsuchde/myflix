@@ -1,4 +1,7 @@
 Myflix::Application.routes.draw do
+  if Rails.env.development?
+    mount LetterOpenerWeb::Engine, at: "/letter_opener"
+  end
   
   root to: 'pages#front'
   get 'ui(/:action)', controller: 'ui'
@@ -34,7 +37,15 @@ Myflix::Application.routes.draw do
   resources :forgot_passwords, only: [:create]
   get 'forgot_password_confirmation', to: 'forgot_passwords#confirmation'
   
-  resources :password_reset, only: [:show]
+  resources :password_resets, only: [:show, :create]
+  get 'expired_token', to: 'password_resets#expired_token'
   
   
 end
+
+
+  
+
+
+
+
