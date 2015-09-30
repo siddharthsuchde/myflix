@@ -6,6 +6,11 @@ def sign_in(a_user=nil)
   click_button 'Sign In'
 end
 
+def sign_out
+  visit logout_path
+end
+
+
 def set_current_user(user=nil)
   session[:user_id] = ( user || Fabricate(:user.id)).id
 end
