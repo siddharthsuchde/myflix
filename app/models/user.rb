@@ -1,4 +1,5 @@
 class User < ActiveRecord::Base
+  include Tokenable
   has_many :reviews
   has_many :user_videos
   has_many :videos, through: :user_videos
@@ -10,7 +11,7 @@ class User < ActiveRecord::Base
   validates :password, presence: true
   validates :email, presence: true
   validates_uniqueness_of :email
-  before_create :generate_token
+  
   
   def queue_video?(video)
     queue_items.map(&:video).include?(video)
@@ -20,8 +21,13 @@ class User < ActiveRecord::Base
     following_relationships.map(&:leader).include?(another_user)
   end
   
-  def generate_token
-    self.token = SecureRandom.urlsafe_base64
+  def follow(another_user)
+    following_relationships.create(leader: another_user) if can_follow?(another_user)
+  end
+  
+  
+  def can_follow?(another_user)
+    !(self.follows?(another_user) || self == another_user)
   end
   
 end

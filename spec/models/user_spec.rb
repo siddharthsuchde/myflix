@@ -7,9 +7,8 @@ describe User do
   it {should validate_presence_of(:password)}
   it {should validate_presence_of(:email)}
   
-  it "generates a random token for each newly created user" do
-    sidd = Fabricate(:user)
-    expect(sidd.token).to be_present
+  it_behaves_like "tokenable" do
+    let(:object) { Fabricate(:user)}
   end
   
   
@@ -46,5 +45,19 @@ describe User do
     end
   end
   
+  describe "#follow(another_user)" do
+    it "follows another user" do
+      alice = Fabricate(:user)
+      bob = Fabricate(:user)
+      alice.follow(bob)
+      expect(alice.follows?(bob)).to be_true
+    end
+    
+    it "does not follow self" do
+      alice = Fabricate(:user)
+      alice.follow(alice)
+      expect(alice.follows?(alice)).to be_false
+    end
+  end
   
 end
