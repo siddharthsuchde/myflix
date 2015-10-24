@@ -20,11 +20,11 @@ Myflix::Application.configure do
   
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
-  address:              'smtp.gmail.com',
-  port:                 587,
-  domain:               'myflix.com',
-  user_name:            'sameerns2007@gmail.com',
-  password:             'liveyoursport',
+  address:              ENV['MAILGUN_SMTP_SERVER'],
+  port:                 ENV['MAILGUN_SMTP_PORT'],
+  domain:               'floating-basin-8368.herokuapp.com',
+  user_name:            ENV['MAILGUN_SMTP_LOGIN'],
+  password:             ENV['MAILGUN_SMTP_PASSWORD'],
   authentication:       'plain',
   enable_starttls_auto: true  }
   
