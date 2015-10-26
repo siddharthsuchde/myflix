@@ -15,6 +15,7 @@ gem 'fabrication'
 gem 'faker'
 gem 'capybara-email'
 gem 'sidekiq'
+gem 'unicorn'
 
 group :development do
   gem 'thin'
