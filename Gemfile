@@ -16,6 +16,7 @@ gem 'faker'
 gem 'capybara-email'
 gem 'sidekiq'
 gem 'unicorn'
+gem 'sentry-raven'
 
 group :development do
   gem 'thin'
@@ -37,7 +38,7 @@ group :test do
   gem 'capybara'
 end
 
-group :production do
+group :production, :staging do
   gem 'rails_12factor'
 end
 
