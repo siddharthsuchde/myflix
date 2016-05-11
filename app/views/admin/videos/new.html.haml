@@ -11,11 +11,12 @@
               %a(href="") Add a New Video
           %br
           %fieldset
-            = f.text_field :title, class: "span1"
+            = f.text_field :title, class: "span3"
             = f.select :category_id, options_for_select(Category.all.map {|category|[category.name, category.id]})
             = f.text_area :description, class: "span6", rows: 6
             = f.file_field :large_cover, class: 'btn btn-file'
             = f.file_field :small_cover, class: 'btn btn-file'
+            = f.text_field :video_url, class: "span3", label: "Video URL"
 
           %fieldset.actions.form-group
             .col-sm-6.col-md-offset-3
