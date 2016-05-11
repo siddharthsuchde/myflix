@@ -15,6 +15,10 @@ def set_current_user(user=nil)
   session[:user_id] = ( user || Fabricate(:user.id)).id
 end
 
+def set_current_admin(admin=nil)
+  session[:user_id] = ( admin || Fabricate(:admin)).id
+end
+
 def add_video_to_queue_on_home_page(video)
   find("a[href= '/videos/#{video.id}']").click
 end

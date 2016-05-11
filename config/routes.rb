@@ -7,6 +7,9 @@ Myflix::Application.routes.draw do
   get 'ui(/:action)', controller: 'ui'
   get '/home', to: 'videos#index'
   
+  namespace :admin do
+    resources :videos, only: [:new, :create]
+  end
   
   resources :videos, only: [:show] do
     resources :categories, only: [:index]

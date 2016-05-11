@@ -17,6 +17,8 @@ gem 'capybara-email'
 gem 'sidekiq'
 gem 'unicorn'
 gem 'sentry-raven'
+gem 'carrierwave'
+gem 'mini_magick'
 
 group :development do
   gem 'thin'
@@ -30,6 +32,7 @@ group :development, :test do
   gem 'pry'
   gem 'pry-nav'
   gem 'rspec-rails', '2.99'
+  gem 'dotenv-rails'
 end
 
 group :test do
@@ -40,5 +43,6 @@ end
 
 group :production, :staging do
   gem 'rails_12factor'
+  gem 'carrierwave-aws'
 end
 
