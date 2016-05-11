@@ -32,6 +32,7 @@ group :development, :test do
   gem 'pry'
   gem 'pry-nav'
   gem 'rspec-rails', '2.99'
+  gem 'dotenv-rails'
 end
 
 group :test do
