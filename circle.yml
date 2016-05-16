@@ -1,0 +1,19 @@
+machine:
+  ruby:
+    version: 2.1.7
+deployment:
+  production:
+    branch: master
+    commands:
+      - heroku maintenance:on --app floating-basin-8368
+      - heroku pg:backups capture --app floating-basin-8368
+      - git push git@heroku.com:floating-basin-8368.git $CIRCLE_SHA1:refs/heads/master
+      - heroku run rake db:migrate --app floating-basin-8368
+      - heroku maintenance:off --app floating-basin-8368
+  staging:
+    branch: staging
+    commands:
+      - heroku maintenance:on --app stagingapp
+      - git push git@heroku.com:stagingapp.git $CIRCLE_SHA1:refs/heads/master
+      - heroku run rake db:migrate --app stagingapp
+      - heroku maintenance:off --app stagingapp
