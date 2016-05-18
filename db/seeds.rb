@@ -6,7 +6,7 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-load(Rails.root.join("db", "seeds.rb"))
+
 
 comedies = Category.create(name: 'Comedies')
 drama = Category.create(name: 'Drama')
